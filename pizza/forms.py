@@ -41,5 +41,16 @@ class PizzaForm(forms.ModelForm):
         model = Pizza
         fields = ['topping1', 'topping2', 'size']
         labels = {'topping1': 'Option 1'}
-        # widgets = {'size': forms.RadioSelect}
-        widgets = {'size': forms.CheckboxSelectMultiple}
+        widgets = {'size': forms.RadioSelect}
+        # widgets = {'size': forms.CheckboxSelectMultiple}
+
+    def clean(self):
+        topping1 = self.cleaned_data.get('topping1')
+        topping2 = self.cleaned_data.get('topping2')
+
+        if 'olives' in (topping1 or topping2):
+            raise ValidationError("Sorry olives are not available!")
+
+
+class MultiplePizzaForm(forms.Form):
+    number_of_pizzas = forms.IntegerField(min_value=2, max_value=6)

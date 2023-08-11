@@ -12,8 +12,19 @@
     {{pizzaform.as_p}}
     <input type="submit" value="Order">
 </form>
+{% if pizza_id %}
+<a href="{% url 'edit' pizza_id %}">Edit your order</a>
+{% endif %}
+
 {% if pizzaform.errors %}
     {{pizzaform.errors.title.as_text}}
 {% endif %}
+
+<h3>Do you want to order more pizzas?</h3>
+<form action="{% url 'pizzas'%}" method="get">
+  {{multiple_pizza_form}}
+<input type="submit" value="Get pizzas">
+</form>
+
 </body>
 </html>

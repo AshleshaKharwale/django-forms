@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Hut- Edit</title>
+</head>
+<body>
+<h1>Edit your order</h1>
+<h3>{{note}}</h3>
+<form method="post">
+    {% csrf_token %}
+    {{pizzaform.as_p}}
+    <input type="submit" value="Edit order">
+</form>
+</body>
+</html>
